@@ -31,8 +31,10 @@ for i in range(0, len(text) - SEQ_len, step_size):
     sentences.append(text[i: i+SEQ_len])
     next_chars.append(text[i+SEQ_len])
 
-x = np.zeros(len(sentences), SEQ_len, len(characters), dtype=np.bool)
-y = np.zeros(len(sentences), len(characters), dtype=np.bool)
+x = np.zeros((len(sentences), SEQ_len,
+              len(characters)), dtype=np.bool)
+y = np.zeros((len(sentences),
+              len(characters)), dtype=np.bool)
 
 for i, sentence in enumerate(sentences):
     for t, character in enumerate(sentence):
@@ -46,7 +48,8 @@ model.add(LSTM(128, input_shape=(SEQ_len, len(characters))))
 model.add(Dense(len(characters)))
 model.add(Activation('softmax'))
 
-model.compile(loss="categorical crossentropy", optimizer=RMSprop(lr=0.01))
+model.compile(loss='categorical_crossentropy',
+              optimizer=RMSprop(lr=0.01))
 model.fit(x, y, batch_size=256, epochs=4)
 
 model.save("textgen.model")
