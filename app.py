@@ -12,7 +12,7 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '-1'  # because my GPU sucks
 fileloc = tf.keras.utils.get_file(
     "shakespeare.txt", "https://storage.googleapis.com/download.tensorflow.org/data/shakespeare.txt")
 
-text = open(fileloc, 'rb').read.decode(encoding='utf-8').lower()
+text = open(fileloc, 'rb').read().decode(encoding='utf-8').lower()
 # selecting just one part of the text instead of the entire ds
 text = text[100000:900000]
 
