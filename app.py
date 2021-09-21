@@ -1,10 +1,12 @@
 import random
 import numpy as np
 import tensorflow as tf
+from tensorflow.keras import optimizers
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Activation
 from tensorflow.keras.optimizers import RMSprop
 
+# Text Pre-processing
 fileloc = tf.keras.utils.get_file(
     "shakespeare.txt", "https://storage.googleapis.com/download.tensorflow.org/data/shakespeare.txt")
 
@@ -34,3 +36,13 @@ for i, sentence in enumerate(sentences):
     for t, character in enumerate(sentence):
         x[i, t, char_to_index[character]] = 1
     y[i, char_to_index[next_chars[i]]] = 1
+
+# Model creation
+
+model = Sequential()
+model.add(LSTM(128, input_shape=(SEQ_len, len(characters))))
+model.add(Dense(len(characters)))
+model.add(Activation('softmax'))
+
+model.compile(loss="categorical crossentropy", optimizer=RMSprop(lr=0.01))
+model.fit(x,y, batch_size=256, epochs=4)
