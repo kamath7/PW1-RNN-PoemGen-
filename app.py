@@ -6,13 +6,13 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Activation
 from tensorflow.keras.optimizers import RMSprop
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '-1' #because my GPU sucks
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'  # because my GPU sucks
 
 # Text Pre-processing
 fileloc = tf.keras.utils.get_file(
     "shakespeare.txt", "https://storage.googleapis.com/download.tensorflow.org/data/shakespeare.txt")
 
-text = open(fileloc, 'rb').read(encoding="utf-8").lower()
+text = open(fileloc, 'rb').read.decode(encoding='utf-8').lower()
 # selecting just one part of the text instead of the entire ds
 text = text[100000:900000]
 
@@ -47,6 +47,6 @@ model.add(Dense(len(characters)))
 model.add(Activation('softmax'))
 
 model.compile(loss="categorical crossentropy", optimizer=RMSprop(lr=0.01))
-model.fit(x,y, batch_size=256, epochs=4)
+model.fit(x, y, batch_size=256, epochs=4)
 
 model.save("textgen.model")
