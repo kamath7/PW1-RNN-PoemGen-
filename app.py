@@ -46,3 +46,5 @@ model.add(Activation('softmax'))
 
 model.compile(loss="categorical crossentropy", optimizer=RMSprop(lr=0.01))
 model.fit(x,y, batch_size=256, epochs=4)
+
+model.save("textgen.model")
