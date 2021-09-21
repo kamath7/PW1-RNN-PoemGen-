@@ -5,6 +5,8 @@ from tensorflow.keras import optimizers
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Activation
 from tensorflow.keras.optimizers import RMSprop
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1' #because my GPU sucks
 
 # Text Pre-processing
 fileloc = tf.keras.utils.get_file(
